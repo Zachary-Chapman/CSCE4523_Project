@@ -1,7 +1,7 @@
 <html>
     <body>
         <h3>Results by Date:</h3>
-        <h3> Please chose a date. </h3>
+        <h3> Please choose a date. </h3>
 
         <form action="date_results.php" method="post" style="margin-bottom: 10px">
             date: <input type="date" name="date" style="margin-bottom: 10px"><br>
