@@ -18,7 +18,7 @@ def printFormat(result):
     print('')
     print('Query Result:')
     print('')
-    return(tabulate(result, headers=header))# print results in table format
+    return(tabulate(result, headers=header, tablefmt="html"))# print results in table format
 
 # select and display query
 def executeSelect (query):
