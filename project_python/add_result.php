@@ -10,7 +10,7 @@
             <input name="submit" type="submit" style="margin-bottom: 20px">
         </form>
 
-        <form action="http://www.csce.uark.edu/~rjnadwod/project_python/home.html">
+        <form action="http://www.csce.uark.edu/~USERNAME/project_python/home.html">
             <input type="submit" value="Return to Home Page" />
         </form>
         <br><br>
