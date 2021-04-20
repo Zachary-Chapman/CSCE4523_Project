@@ -56,8 +56,8 @@ def getID(ID, tableName):
       return result[0][0]
       
 #my mysql username and password
-username = 'zachapma' 
-myPassword ='Eeja3dae'
+username = 'USERNAME' 
+myPassword ='PASSWORD'
 
 openDatabase('localhost', username, myPassword, username) #open my database
 i = 0
