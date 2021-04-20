@@ -1,6 +1,3 @@
-mysql
-
-use zachapma
 
 create TABLE TEAM(
 TeamID int,
@@ -25,6 +22,7 @@ TeamOneID int,
 TeamTwoID int,
 ScoreOne int,
 ScoreTwo int,
+Winner char(50),
 PRIMARY KEY(GameID),
 FOREIGN KEY(GameID) REFERENCES GAME(GameID),
 FOREIGN KEY(TeamOneID) REFERENCES TEAM(TeamID),
@@ -49,17 +47,39 @@ INSERT INTO GAME VALUES (6, 1, 2, 'Unity Court', '2021-4-3');
 INSERT INTO GAME VALUES (7, 1, 1, 'Unity Court', '2021-4-5');
 
 
-INSERT INTO RESULT VALUES (1, 1, 2, 85, 66);
-INSERT INTO RESULT VALUES (2, 3, 4, 49, 51);
-INSERT INTO RESULT VALUES (3, 5, 6, 81, 72);
-INSERT INTO RESULT VALUES (4, 7, 8, 61, 67);
-INSERT INTO RESULT VALUES (5, 1, 4, 93, 90);
-INSERT INTO RESULT VALUES (6, 5, 8, 78, 59);
-INSERT INTO RESULT VALUES (7, 1, 5, 70, 86);
+INSERT INTO RESULT VALUES (1, 1, 2, 85, 66, 'Gonzaga');
+INSERT INTO RESULT VALUES (2, 3, 4, 49, 51, 'UCLA');
+INSERT INTO RESULT VALUES (3, 5, 6, 81, 72, 'Baylor');
+INSERT INTO RESULT VALUES (4, 7, 8, 61, 67, 'Houston');
+INSERT INTO RESULT VALUES (5, 1, 4, 93, 90, 'Gonzaga');
+INSERT INTO RESULT VALUES (6, 5, 8, 78, 59, 'Baylor');
+INSERT INTO RESULT VALUES (7, 1, 5, 70, 86, 'Baylor');
 
 SELECT * FROM TEAM;
 SELECT * FROM GAME;
 SELECT * FROM RESULT;
 
+SELECT t1.TeamName AS 'Team Name', t1.Nickname, 
+r.GameID, r.ScoreOne AS 'Team Score', r.ScoreTwo AS 'Opponents Score',
+t2.TeamName AS 'Opponents Name', g.date, r.Winner FROM RESULT r
+LEFT JOIN TEAM t1 ON r.TeamOneID = t1.TeamID
+LEFT JOIN TEAM t2 ON r.TeamTwoID = t2.TeamID
+LEFT JOIN GAME g ON r.GameID = g.GameID
+WHERE t1.TeamName = 'Gonzaga'
+UNION 
+SELECT t2.TeamName AS 'Team Name', t2.Nickname, 
+r.GameID, r.ScoreOne AS 'Team Score', r.ScoreTwo AS 'Opponents Score',
+t1.TeamName AS 'Opponents Name', g.date, r.Winner FROM RESULT r
+LEFT JOIN TEAM t1 ON r.TeamOneID = t1.TeamID
+LEFT JOIN TEAM t2 ON r.TeamTwoID = t2.TeamID
+LEFT JOIN GAME g ON r.GameID = g.GameID
+WHERE t2.TeamName = 'Gonzaga';
 
-
+SELECT g.Date, g.Location, t.TeamName AS 'Home', t.Nickname, T.TeamName AS 'Away', T. Nickname, 
+r.ScoreOne AS 'Home Score', 
+r.ScoreTwo AS 'Away Score', r.Winner  
+FROM RESULT r 
+LEFT JOIN GAME g ON r.GameID = g.GameID 
+LEFT JOIN TEAM t ON r.TeamOneID = t.TeamID 
+LEFT JOIN TEAM T ON r.TeamTwoID = T.TeamID 
+WHERE Date='2021-03-30';

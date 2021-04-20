@@ -56,8 +56,8 @@ def getID(ID, tableName):
       return result[0][0]
       
 #my mysql username and password
-username = 'USERNAME' 
-myPassword ='PASSWORD'
+username = 'zachapma' 
+myPassword ='Eeja3dae'
 
 openDatabase('localhost', username, myPassword, username) #open my database
 i = 0
@@ -103,11 +103,40 @@ while i != 7:
         team2_ID = int(input("Enter the ID of the second team (Please make sure the team is in the database): "))
         score1 = int(input("Enter the score that the first team got at the end of the game: "))
         score2 = int(input("Enter the socre that the second team got at the end of the game: "))
-        resultValue = str(gameID) + ", " + str(team1_ID) + ", " + str(team2_ID) + ", " + str(score1) + ", " + str(score2)
+        winner = input("Enter the team name of the winner: ")
+        resultValue = str(gameID) + ", " + str(team1_ID) + ", " + str(team2_ID) + ", " + str(score1) + ", " + str(score2) + ", '" + winner + "'"
         insert(table, resultValue)
         query = "SELECT * FROM RESULT;"
         executeSelect(query) 
 
+    if i == 4:
+        query = "SELECT * FROM TEAM;"
+        result = getData(query)
+        printFormat(result)
+
+    if i == 5:
+        teamName = input("Enter the name of the team you would like see the results for: ")
+        query_pt1 = "SELECT t1.TeamName AS 'Team Name', t1.Nickname, r.GameID, r.ScoreOne AS 'Team Score', "
+        query_pt2 = "r.ScoreTwo AS 'Opponents Score', t2.TeamName AS 'Opponets Name', g.date, r.Winner FROM RESULT r "
+        query_pt3 = "LEFT JOIN TEAM t1 ON r.TeamOneID = t1.TeamID LEFT JOIN TEAM t2 ON r.TeamTwoID = t2.TeamID "
+        query_pt4 = "LEFT JOIN GAME g ON r.GameID = g.GameID WHERE t1.TeamName = '" + teamName + "' UNION "
+        query_pt5 = "SELECT t2.TeamName AS 'Team Name', t2.Nickname, r.GameID, r.ScoreOne AS 'Team Score', "
+        query_pt6 = "r.ScoreTwo AS 'Opponents Score', t1.TeamName AS 'Opponets Name', g.date, r.Winner FROM RESULT r "
+        query_pt7 = "LEFT JOIN TEAM t1 ON r.TeamOneID = t1.TeamID LEFT JOIN TEAM t2 ON r.TeamTwoID = t2.TeamID "
+        query_pt8 = "LEFT JOIN GAME g ON r.GameID = g.GameID WHERE t2.TeamName = '" + teamName + "';"
+        query = query_pt1 + query_pt2 + query_pt3 + query_pt4 + query_pt5 + query_pt6 + query_pt7 + query_pt8
+        result = getData(query)
+        printFormat(result)
+
+    if i == 6:
+          date = input("Enter the date of the day you would like to see the results for (YYYY-MM-DD): ")
+          query = """SELECT g.Date, g.Location, t.TeamName AS 'Home', t.Nickname, T.TeamName AS 'Away', T.Nickname, 
+                  r.ScoreOne AS 'Home Score', r.ScoreTwo AS 'Away Score', r.Winner FROM RESULT r 
+                  LEFT JOIN GAME g ON r.GameID = g.GameID LEFT JOIN TEAM t ON r.TeamOneID = t.TeamID 
+                  LEFT JOIN TEAM T ON r.TeamTwoID = T.TeamID WHERE Date = '""" + date + "';"
+          print(query)
+          result = getData(query)
+          printFormat(result)
 
 
     if i == 7:
