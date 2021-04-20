@@ -1,0 +1,65 @@
+mysql
+
+use zachapma
+
+create TABLE TEAM(
+TeamID int,
+TeamName char(50) NOT NULL,
+Nickname char(50) NOT NULL,
+Rank int,
+PRIMARY KEY(TeamID)
+);
+
+create TABLE GAME(
+GameID int,
+Rank1 int,
+Rank2 int,
+Location char(50),
+Date date NOT NULL,
+PRIMARY KEY(GameID)
+);
+
+create TABLE RESULT(
+GameID int,
+TeamOneID int,
+TeamTwoID int,
+ScoreOne int,
+ScoreTwo int,
+PRIMARY KEY(GameID),
+FOREIGN KEY(GameID) REFERENCES GAME(GameID),
+FOREIGN KEY(TeamOneID) REFERENCES TEAM(TeamID),
+FOREIGN KEY(TeamTwoID) REFERENCES TEAM(TeamID)
+);
+
+INSERT INTO TEAM VALUES (1, 'Gonzaga', 'GONZ', 1);
+INSERT INTO TEAM VALUES (2, 'USC', 'USC', 6);
+INSERT INTO TEAM VALUES (3, 'Michigan', 'MICH', 1);
+INSERT INTO TEAM VALUES (4, 'UCLA', 'UCLA', 11);
+INSERT INTO TEAM VALUES (5, 'Baylor', 'BAY', 1);
+INSERT INTO TEAM VALUES (6, 'Arkansas', 'UARK', 3);
+INSERT INTO TEAM VALUES (7, 'Oregon St.', 'ORST', 12);
+INSERT INTO TEAM VALUES (8, 'Houston', 'HOUS', 2);
+
+INSERT INTO GAME VALUES (1, 1, 6, 'Equality Court', '2021-3-30');
+INSERT INTO GAME VALUES (2, 1, 11, 'Unity Court', '2021-3-30');
+INSERT INTO GAME VALUES (3, 1, 3, 'Unity Court', '2021-3-29');
+INSERT INTO GAME VALUES (4, 12, 2, 'Equality Court', '2021-3-29');
+INSERT INTO GAME VALUES (5, 1, 11, 'Unity Court', '2021-4-3');
+INSERT INTO GAME VALUES (6, 1, 2, 'Unity Court', '2021-4-3');
+INSERT INTO GAME VALUES (7, 1, 1, 'Unity Court', '2021-4-5');
+
+
+INSERT INTO RESULT VALUES (1, 1, 2, 85, 66);
+INSERT INTO RESULT VALUES (2, 3, 4, 49, 51);
+INSERT INTO RESULT VALUES (3, 5, 6, 81, 72);
+INSERT INTO RESULT VALUES (4, 7, 8, 61, 67);
+INSERT INTO RESULT VALUES (5, 1, 4, 93, 90);
+INSERT INTO RESULT VALUES (6, 5, 8, 78, 59);
+INSERT INTO RESULT VALUES (7, 1, 5, 70, 86);
+
+SELECT * FROM TEAM;
+SELECT * FROM GAME;
+SELECT * FROM RESULT;
+
+
+

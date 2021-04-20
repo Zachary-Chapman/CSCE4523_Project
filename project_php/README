@@ -1,0 +1,40 @@
+Here is a summary.
+
+1. cd                        // go to your home directory
+2. chmod o+x public_html     // make sure that your web directory is accessible by everyone
+3. cd public_html            // go to your web space
+4. cp ~sgauch/public_html/4523/S21/hw/project/* .     // copy the 3 tar files to your new directory
+5. tar xvf project_php.tar   // untar the sample php code
+6. chmod o+x project_php     // make the project_php directory accessible by everyone
+7. cd project_php
+8. Open:  http://www.csce.uark.edu/~MYUSERNAME/project_php/hello.html in a web browser
+9. Edit php_insert_item.php; replace MYUSERNAME and MYMYSQLPASSWORD
+11. Open:  http://www.csce.uark.edu/~MYUSERNAME/project_php/hello.php in a web browser
+12. Open:  http://www.csce.uark.edu/~MYUSERNAME/project_php/php_insert_item.php in a web browser
+
+
+hello.html
+   A static html page to check that your project directory is accessible on the web
+   You can view this page at http://www.csce.uark.edu/~sgauch/project_php/hello.html
+
+hello.php
+   A php page that uses a form to get user input, then calls hello.exe to echo it to the screen.
+   This checks that you can call php in your own directory and have it pass parameters to
+   an executable program.
+   You can view this page at http://www.csce.uark.edu/~sgauch/project_php/hello.php
+
+hello.php
+   The executable program called from hello.php.
+
+php_db.h and php_db.php
+   The php_db class definition (header and implementation files).
+   This class contains a handful of useful functions that use php to connect to mysql.
+
+php_insert_item.php
+   A Php program that includes (and uses) the php_db class.  It is given arguments on the
+   command line, in the order:  name price_per_lb roasting_type
+   e.g.,
+      turing$ php_insert_item.php robusta 12 M 
+   It connects to mysql to insert that restaurant into the Restaurant table. Please note this is just a sample and it has been shared to let you understand how Php and MySQL can be integrated. You may note that ID is a primary key and hard-coded in this program so you need to change it everytime you run the program;otherwise the program will not get executed
+   You can view this page at http://www.csce.uark.edu/~sgauch/project_php/php_insert_item.php
+   
