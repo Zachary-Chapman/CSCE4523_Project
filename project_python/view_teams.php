@@ -1,30 +1,28 @@
 <html>
     <body>
-        <h3>All Teams:</h3>
+        <form action="view_teams.php" method="get" style="padding-bottom:10px">
+            <input type="submit" name="submit" value="Click to View Teams"/>
+        </form>
 
-        <table style="width:50%; border:1px solid black;">
-        <tr>
-            <th>Team ID</th>
-            <th>Team Name</th>
-            <th>Nickname</th>
-            <th>Rank</th>
-        </tr>
-        <tr>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-        </tr>
-        <tr>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-        </tr>
-        </table>
-        <br><br>
+        <?php
+        if (isset($_GET['submit'])) 
+        {
+            // replace ' ' with '\ ' in the strings so they are treated as single command line args
+            $teamname = escapeshellarg($_POST[teamname]);
+            $nickname= escapeshellarg($_POST[nickname]);
+            $rank = escapeshellarg($_POST[rank]);
 
-        <form action="http://www.csce.uark.edu/~USERNAME/project_python/home.html">
+            $command = 'python3 view_teams.py';
+
+            // remove dangerous characters from command to protect web server
+            $escaped_command = escapeshellcmd($command);
+            echo "<p>command: $command <p>"; 
+            // run view_teams.py
+            system($escaped_command);
+        }
+        ?>
+
+        <form action="http://www.csce.uark.edu/~rjnadwod/project_python/home.html">
             <input type="submit" value="Return to Home Page" />
         </form>
 
