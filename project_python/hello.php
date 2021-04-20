@@ -1,14 +1,14 @@
 <html>
-<body>
-<h3>Enter your name:</h3>
+    <body>
+    <h3>Enter your name:</h3>
 
-<form action="hello.php" method="post">
-    Name: <input type="text" name="name"><br>
-    <input name="submit" type="submit" >
-</form>
-<br><br>
+    <form action="hello.php" method="post">
+        Name: <input type="text" name="name"><br>
+        <input name="submit" type="submit" >
+    </form>
+    <br><br>
 
-</body>
+    </body>
 </html>
 
 <?php
