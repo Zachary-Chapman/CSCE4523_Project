@@ -18,7 +18,7 @@ try:
     teamtwo = sys.argv[2]
     location = sys.argv[3]
     date = sys.argv[4]
-    val = "NULL" + ", " + teamone + ", " + teamtwo + ", '" + location + "','" + date + "'"
+    val = "1" + ", " + teamone + ", " + teamtwo + ", '" + location + "','" + date + "'"
     python_db.insert("GAME",val)
     res = python_db.executeSelect('SELECT * FROM GAME;')
     res=res.split('\n')# split the header and data for printing

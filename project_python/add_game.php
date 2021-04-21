@@ -60,7 +60,6 @@ if (isset($_POST['submit']))
     $teamtwo = escapeshellarg($_POST[teamTwo]);
     $location = escapeshellarg($_POST[location]);
     $date = escapeshellarg($_POST[date]);
-    echo "$teamone, $teamtwo";
 
     $command = 'python3 add_game.py' . ' '.  $teamone . ' ' . $teamtwo . ' ' . $location . ' ' . $date;
 

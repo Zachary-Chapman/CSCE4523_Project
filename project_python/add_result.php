@@ -36,3 +36,4 @@ if(isset($_POST['submit']))
     echo "<p>command: $command <p>";
     system($escaped_command);
 }
+?>
