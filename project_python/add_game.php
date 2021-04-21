@@ -4,16 +4,16 @@
 $pdo = new PDO('mysql:host=localhost;dbname=rjnadwod', 'rjnadwod', 'eic0ahSh');
 
 //Our select statement. This will retrieve the data that we want.
-$sql = "SELECT TeamName FROM TEAM";
+$sql = "SELECT * FROM TEAM";
 
 //Prepare the select statement.
-$stmt = $pdo->prepare($sql);
+$statement = $pdo->prepare($sql);
 
 //Execute the statement.
-$stmt->execute();
+$statement->execute();
 
 //Retrieve the rows using fetchAll.
-$teams = $stmt->fetchAll();
+$teams = $statement->fetchAll();
 
 ?>
 
@@ -21,15 +21,21 @@ $teams = $stmt->fetchAll();
     <body>
         <h3>Enter Game Details:</h3>
         <form action="add_game.php" method="post" style="margin-bottom: 10px">
-            Team One: <select name="teamone" style="margin-bottom: 10px">
+            Team One: 
+            <select name="teamOne" style="margin-bottom: 10px">
                 <?php foreach($teams as $team1): ?>
-                    <option name ="team1" value="<?= $team1['TeamID']; ?>"><?= $team1['TeamName']; ?></option>
+                    <option value="<?= $team1['TeamID']; ?>">
+                        <?= $team1['TeamName']; ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
             <br>
-            Team Two: <select name="teamtwo" style="margin-bottom: 10px">
+            Team Two: 
+            <select name="teamTwo" style="margin-bottom: 10px">
                 <?php foreach($teams as $team2): ?>
-                    <option name="team2" value="<?= $team2['TeamID']; ?>"><?= $team2['TeamName']; ?></option>
+                    <option value="<?= $team2['TeamID']; ?>">
+                        <?= $team2['TeamName']; ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
             <br>
@@ -45,3 +51,23 @@ $teams = $stmt->fetchAll();
 
     </body>
 </html>
+
+<?php
+if (isset($_POST['submit'])) 
+{
+    // replace ' ' with '\ ' in the strings so they are treated as single command line args
+    $teamone = escapeshellarg($_POST[teamOne]);
+    $teamtwo = escapeshellarg($_POST[teamTwo]);
+    $location = escapeshellarg($_POST[location]);
+    $date = escapeshellarg($_POST[date]);
+    echo "$teamone, $teamtwo";
+
+    $command = 'python3 add_game.py' . ' '.  $teamone . ' ' . $teamtwo . ' ' . $location . ' ' . $date;
+
+    // remove dangerous characters from command to protect web server
+    $escaped_command = escapeshellcmd($command);
+    echo "<p>command: $command <p>"; 
+    // run add_team.py
+    system($escaped_command);           
+}
+?>
