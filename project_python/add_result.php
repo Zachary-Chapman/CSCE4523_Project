@@ -1,11 +1,45 @@
+<?php
+
+//Connect to our MySQL database using the PDO extension.
+$pdo = new PDO('mysql:host=localhost;dbname=rjnadwod', 'rjnadwod', 'eic0ahSh');
+
+//Our select statement. This will retrieve the data that we want.
+$sql = "SELECT * FROM TEAM";
+
+//Prepare the select statement.
+$statement = $pdo->prepare($sql);
+
+//Execute the statement.
+$statement->execute();
+
+//Retrieve the rows using fetchAll.
+$teams = $statement->fetchAll();
+
+?>
+
 <html>
     <body>
         <h3>Enter Game Results:</h3>
 
         <form action="add_result.php" method="post" style="margin-bottom: 10px">
             Game ID: <input type="number" name="gameID" style="margin-bottom: 10px"><br>
-            Team One ID: <input type="number" name="teamOne" style="margin-bottom: 10px"><br>
-            Team Two ID: <input type="number" name="teamTwo" style="margin-bottom: 10px"><br>
+            Team One: 
+            <select name="teamOne" style="margin-bottom: 10px">
+                <?php foreach($teams as $team1): ?>
+                    <option value="<?= $team1['TeamID']; ?>">
+                        <?= $team1['TeamName']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <br>
+            Team Two: 
+            <select name="teamTwo" style="margin-bottom: 10px">
+                <?php foreach($teams as $team2): ?>
+                    <option value="<?= $team2['TeamID']; ?>">
+                        <?= $team2['TeamName']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select><br>
             Team One Score: <input type="number" name="teamOneScore" style="margin-bottom: 10px"><br>
             Team Two Score: <input type="number" name="teamTwoScore" style="margin-bottom: 10px"><br>
             Winner: <input type="text" name="winner" style="margin-bottom: 10px"><br>
