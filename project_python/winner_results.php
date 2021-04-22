@@ -50,7 +50,7 @@ if(isset($_POST['submit']))
     $command = 'python3 winner_results.py' . ' ' . $teamname;
 
     $escaped_command = escapeshellcmd($command);
-    echo "<p>command: $command <p>";
+    //echo "<p>command: $command <p>";
     system($escaped_command);
 }
 ?>
