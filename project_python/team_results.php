@@ -35,7 +35,7 @@ $teams = $statement->fetchAll();
         
         <br>
 
-        <form action="http://www.csce.uark.edu/~rjnadwod/project_python/home.html">
+        <form action="http://www.csce.uark.edu/~zachapma/project_python/home.html">
             <input type="submit" value="Return to Home Page" />
         </form>
 
@@ -50,7 +50,7 @@ if(isset($_POST['submit']))
     $command = 'python3 team_results.py' . ' ' . $teamname;
 
     $escaped_command = escapeshellcmd($command);
-    echo "<p>command: $command <p>";
+    //echo "<p>command: $command <p>";
     system($escaped_command);
 }
 ?>

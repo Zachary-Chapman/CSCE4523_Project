@@ -16,13 +16,13 @@
 
             // remove dangerous characters from command to protect web server
             $escaped_command = escapeshellcmd($command);
-            echo "<p>command: $command <p>"; 
+            //echo "<p>command: $command <p>"; 
             // run view_teams.py
             system($escaped_command);
         }
         ?>
 
-        <form action="http://www.csce.uark.edu/~rjnadwod/project_python/home.html">
+        <form action="http://www.csce.uark.edu/~zachapma/project_python/home.html">
             <input type="submit" value="Return to Home Page" />
         </form>
 
